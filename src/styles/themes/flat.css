@@ -1,0 +1,54 @@
+/*
+ * Theme: flat — THE CANARY.
+ *
+ * Never imported by index.css, never rendered in the playground, never
+ * exported. It exists as a specification: if a component cannot survive
+ * these token values, the component has reached for a glass-only concept and
+ * the vocabulary is wrong.
+ *
+ * The material tokens are the ones at risk of becoming load-bearing, so they
+ * are the ones set to inert values here:
+ *
+ *   --ui-surface-blur       none
+ *   --ui-surface-highlight  a valid but invisible shadow
+ *   --ui-surface-scrim-opacity  1 — surfaces are fully opaque
+ *
+ * One finding from filling this in: --ui-surface-tint is NOT set to
+ * `transparent`. Tint is the colour of a surface; scrim opacity is what makes
+ * it translucent. A flat theme is scrim-opacity 1, not a tint that has been
+ * erased — erasing the tint would leave every surface with no colour at all.
+ *
+ * A second finding: --ui-surface-highlight is `0 0 0 0 transparent` rather
+ * than `none`, because it is composed into a box-shadow list next to
+ * --ui-shadow-raised, and `box-shadow: none, none` is invalid CSS. Inert
+ * values in this vocabulary have to stay grammatical.
+ */
+
+[data-ui-theme="flat"] {
+  /* Shape — flat is square-ish and crisp. */
+  --ui-radius-control: var(--ui-radius-sm);
+  --ui-radius-surface: var(--ui-radius-sm);
+  --ui-border-width: 1px;
+
+  /* Material — entirely inert. */
+  --ui-surface-blur: none;
+  --ui-surface-highlight: 0 0 0 0 transparent;
+  --ui-surface-scrim-opacity: 1;
+
+  /* Elevation — a hairline instead of a glow. */
+  --ui-shadow-raised: 0 1px 2px rgb(0 0 0 / 0.06);
+  --ui-shadow-overlay: 0 8px 24px rgb(0 0 0 / 0.18);
+
+  /* Motion */
+  --ui-transition: var(--ui-duration-fast) var(--ui-ease-standard);
+}
+
+[data-ui-theme="flat"]:where([data-ui-color-scheme="light"]) {
+  --ui-surface-tint: var(--ui-grey-0);
+  --ui-surface-base: var(--ui-grey-100);
+}
+
+[data-ui-theme="flat"]:where([data-ui-color-scheme="dark"]) {
+  --ui-surface-tint: var(--ui-grey-900);
+  --ui-surface-base: var(--ui-grey-950);
+}

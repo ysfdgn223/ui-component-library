@@ -1,0 +1,68 @@
+{
+  "name": "@ysfdgn223/ui",
+  "version": "0.1.0",
+  "description": "A React component library where every visual decision is a token, so a theme is a block of CSS.",
+  "license": "MIT",
+  "author": "ysfdgn223",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ysfdgn223/ui-component-library.git"
+  },
+  "type": "module",
+  "sideEffects": [
+    "*.css"
+  ],
+  "files": [
+    "dist"
+  ],
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    },
+    "./styles.css": {
+      "types": "./dist/styles.css.d.ts",
+      "default": "./dist/styles.css"
+    }
+  },
+  "scripts": {
+    "dev": "vite --config playground/vite.config.ts",
+    "build": "vite build",
+    "build:playground": "vite build --config playground/vite.config.ts",
+    "preview": "vite preview --config playground/vite.config.ts",
+    "typecheck": "tsc --noEmit",
+    "lint:css": "stylelint \"src/**/*.css\"",
+    "test": "playwright test",
+    "test:install": "playwright install --with-deps chromium",
+    "verify:pack": "node scripts/verify-tarball.mjs"
+  },
+  "peerDependencies": {
+    "react": "^18.0.0 || ^19.0.0",
+    "react-dom": "^18.0.0 || ^19.0.0"
+  },
+  "dependencies": {
+    "@base-ui/react": "1.7.0",
+    "clsx": "2.1.1"
+  },
+  "devDependencies": {
+    "@axe-core/playwright": "4.13.0",
+    "@playwright/test": "1.62.1",
+    "@types/node": "24.10.4",
+    "@types/react": "19.2.18",
+    "@types/react-dom": "19.2.5",
+    "@typescript/typescript6": "6.0.2",
+    "@vitejs/plugin-react": "6.1.1",
+    "react": "19.2.8",
+    "react-dom": "19.2.8",
+    "stylelint": "17.14.1",
+    "stylelint-declaration-strict-value": "1.12.1",
+    "typescript": "7.0.2",
+    "vite": "8.2.2",
+    "vite-plugin-dts": "5.1.0",
+    "vite-plugin-lib-inject-css": "2.2.2"
+  },
+  "engines": {
+    "node": ">=20.19.0"
+  }
+}

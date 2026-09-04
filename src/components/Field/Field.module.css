@@ -1,0 +1,27 @@
+.root {
+  display: flex;
+  flex-direction: column;
+  gap: var(--ui-space-2);
+  width: 100%;
+}
+
+.label {
+  font-size: var(--ui-text-sm);
+  font-weight: var(--ui-weight-medium);
+  color: var(--ui-color-fg);
+}
+
+.description {
+  font-size: var(--ui-text-sm);
+  color: var(--ui-color-fg-muted);
+}
+
+.error {
+  font-size: var(--ui-text-sm);
+  font-weight: var(--ui-weight-medium);
+  color: var(--ui-color-danger);
+}
+
+/* A disabled field dims its control and nothing else. Dimming the label and
+   the description too drops them below 4.5:1, and they are the parts a reader
+   still needs — the disabled affordance belongs on the inactive control. */

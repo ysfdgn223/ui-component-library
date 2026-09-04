@@ -1,0 +1,148 @@
+.root {
+  /* Layer 3 — knobs no other component needs. */
+  --ui-button-padding-x: var(--ui-space-4);
+  --ui-button-padding-y: var(--ui-space-2);
+  --ui-button-font-size: var(--ui-text-base);
+  --ui-button-tone: var(--ui-color-accent);
+  --ui-button-tone-hover: var(--ui-color-accent-hover);
+  --ui-button-tone-contrast: var(--ui-color-accent-fg);
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--ui-space-2);
+  padding: var(--ui-button-padding-y) var(--ui-button-padding-x);
+  border-style: solid;
+  border-width: var(--ui-border-width);
+  border-color: transparent;
+  border-radius: var(--ui-radius-control);
+  font-family: var(--ui-font-sans);
+  font-size: var(--ui-button-font-size);
+  font-weight: var(--ui-weight-medium);
+  line-height: 1.25;
+  text-decoration: none;
+  white-space: nowrap;
+  cursor: pointer;
+  transition:
+    background-color var(--ui-transition),
+    border-color var(--ui-transition),
+    color var(--ui-transition),
+    box-shadow var(--ui-transition),
+    transform var(--ui-transition);
+}
+
+.root:focus-visible {
+  outline: var(--ui-focus-ring-width) solid var(--ui-color-focus-ring);
+  outline-offset: var(--ui-focus-ring-offset);
+}
+
+.root:disabled,
+.root[data-disabled] {
+  cursor: not-allowed;
+  opacity: var(--ui-opacity-disabled);
+}
+
+.root:not(:disabled):not([data-disabled]):active {
+  transform: translateY(1px);
+}
+
+/* Tones set the colour role; variants decide how it is applied. */
+.toneAccent {
+  --ui-button-tone: var(--ui-color-accent);
+  --ui-button-tone-hover: var(--ui-color-accent-hover);
+  --ui-button-tone-contrast: var(--ui-color-accent-fg);
+}
+
+.toneNeutral {
+  --ui-button-tone: var(--ui-color-fg);
+  --ui-button-tone-hover: color-mix(in srgb, var(--ui-color-fg) 82%, var(--ui-color-bg));
+  --ui-button-tone-contrast: var(--ui-color-bg);
+}
+
+.toneDanger {
+  --ui-button-tone: var(--ui-color-danger);
+  --ui-button-tone-hover: color-mix(in srgb, var(--ui-color-danger) 84%, var(--ui-color-fg));
+  --ui-button-tone-contrast: var(--ui-color-danger-fg);
+}
+
+.solid {
+  color: var(--ui-button-tone-contrast);
+  background-color: var(--ui-button-tone);
+  box-shadow: var(--ui-elevation-raised);
+}
+
+.solid:not(:disabled):hover {
+  background-color: var(--ui-button-tone-hover);
+}
+
+/* Soft and outline tint the theme's surface rather than tinting transparency
+   directly, so they inherit the scrim: when a degradation path turns the scrim
+   to 1, these go opaque with everything else instead of leaving a translucent
+   wash over unpredictable content. */
+.soft {
+  color: var(--ui-button-tone);
+  background-color: color-mix(in srgb, var(--ui-button-tone) 14%, var(--ui-surface-raised));
+  backdrop-filter: var(--ui-surface-blur);
+}
+
+.soft:not(:disabled):hover {
+  background-color: color-mix(in srgb, var(--ui-button-tone) 24%, var(--ui-surface-raised));
+}
+
+.outline {
+  color: var(--ui-button-tone);
+  background-color: var(--ui-surface-raised);
+  border-color: var(--ui-color-border-strong);
+  backdrop-filter: var(--ui-surface-blur);
+  box-shadow: var(--ui-surface-highlight);
+}
+
+.outline:not(:disabled):hover {
+  background-color: color-mix(in srgb, var(--ui-button-tone) 12%, var(--ui-surface-raised));
+}
+
+/* A ghost button has no surface at all — there is nothing for a scrim to make
+   opaque, which is the point of the variant. */
+.ghost {
+  color: var(--ui-button-tone);
+  background-color: transparent;
+}
+
+.ghost:not(:disabled):hover {
+  background-color: color-mix(in srgb, var(--ui-button-tone) 12%, transparent);
+}
+
+.sizeSm {
+  --ui-button-padding-x: var(--ui-space-3);
+  --ui-button-padding-y: var(--ui-space-1);
+  --ui-button-font-size: var(--ui-text-sm);
+}
+
+.sizeMd {
+  --ui-button-padding-x: var(--ui-space-4);
+  --ui-button-padding-y: var(--ui-space-2);
+  --ui-button-font-size: var(--ui-text-base);
+}
+
+.sizeLg {
+  --ui-button-padding-x: var(--ui-space-5);
+  --ui-button-padding-y: var(--ui-space-3);
+  --ui-button-font-size: var(--ui-text-lg);
+}
+
+/* Icon slots: the library ships no icons, it only sizes and colours whatever
+   node it is handed. */
+.icon {
+  display: inline-flex;
+  flex: none;
+  align-items: center;
+  justify-content: center;
+  width: var(--ui-icon-size);
+  height: var(--ui-icon-size);
+  color: currentColor;
+}
+
+.icon > * {
+  width: 100%;
+  height: 100%;
+}

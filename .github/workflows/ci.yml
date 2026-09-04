@@ -1,0 +1,41 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - run: npm ci
+
+      # The token discipline is a build failure, not a test.
+      - run: npm run lint:css
+
+      # Typechecks the library and the playground, which exercises the public
+      # props interfaces for free.
+      - run: npm run typecheck
+
+      - run: npx playwright install --with-deps chromium
+
+      # Seam 1: the specimen page, in a real browser.
+      - run: npm test
+
+      # Seam 2: the packed tarball, in a scratch consumer. Includes the build.
+      - run: npm run verify:pack
+
+      - if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: playwright-report
+          path: playwright-report/
+          retention-days: 7

@@ -1,0 +1,27 @@
+/*
+ * Dark colour scheme. Same roles, different values — no component knows
+ * which of the two it is rendering under.
+ */
+
+[data-ui-color-scheme="dark"] {
+  color-scheme: dark;
+
+  --ui-color-bg: var(--ui-grey-950);
+  --ui-color-fg: var(--ui-grey-50);
+  --ui-color-fg-muted: var(--ui-grey-300);
+  --ui-color-border: var(--ui-grey-700);
+  --ui-color-border-strong: var(--ui-grey-600);
+
+  /* blue-300 rather than blue-400, for the same reason in the other
+     direction: 400 as text on a dark surface lands at 4.0:1. */
+  --ui-color-accent: var(--ui-blue-300);
+  --ui-color-accent-hover: var(--ui-blue-200);
+  --ui-color-accent-fg: var(--ui-grey-950);
+
+  --ui-color-danger: var(--ui-red-300);
+  --ui-color-danger-fg: var(--ui-grey-950);
+  --ui-color-success: var(--ui-green-300);
+  --ui-color-warning: var(--ui-amber-300);
+
+  --ui-color-focus-ring: var(--ui-color-accent);
+}

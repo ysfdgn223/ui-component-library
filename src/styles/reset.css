@@ -1,0 +1,30 @@
+/*
+ * A minimal reset, scoped to the provider element. The library never writes
+ * declarations onto html, body or a bare element selector — a consumer's page
+ * is theirs.
+ */
+
+[data-ui-theme] {
+  box-sizing: border-box;
+  color: var(--ui-color-fg);
+  font-family: var(--ui-font-sans);
+  font-size: var(--ui-text-base);
+  line-height: 1.5;
+  background: var(--ui-surface-base);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizelegibility;
+}
+
+[data-ui-theme] *,
+[data-ui-theme] *::before,
+[data-ui-theme] *::after {
+  box-sizing: inherit;
+}
+
+/* Reduced motion is not a glass concern — it applies to whatever theme is
+   mounted, so it lives with the token defaults rather than in a theme file. */
+@media (prefers-reduced-motion: reduce) {
+  [data-ui-theme] {
+    --ui-transition: 0s;
+  }
+}

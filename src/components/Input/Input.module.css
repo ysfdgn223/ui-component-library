@@ -1,0 +1,40 @@
+.root {
+  --ui-input-padding-x: var(--ui-space-3);
+  --ui-input-padding-y: var(--ui-space-2);
+  --ui-input-border-color: var(--ui-color-border-strong);
+
+  width: 100%;
+  padding: var(--ui-input-padding-y) var(--ui-input-padding-x);
+  border-style: solid;
+  border-width: var(--ui-border-width);
+  border-color: var(--ui-input-border-color);
+  border-radius: var(--ui-radius-control);
+  font-family: var(--ui-font-sans);
+  font-size: var(--ui-text-base);
+  color: var(--ui-color-fg);
+  background-color: var(--ui-surface-raised);
+  backdrop-filter: var(--ui-surface-blur);
+  box-shadow: var(--ui-surface-highlight);
+  transition:
+    border-color var(--ui-transition),
+    background-color var(--ui-transition);
+}
+
+.root::placeholder {
+  color: var(--ui-color-fg-muted);
+}
+
+.root:focus-visible {
+  outline: var(--ui-focus-ring-width) solid var(--ui-color-focus-ring);
+  outline-offset: var(--ui-focus-ring-offset);
+}
+
+.root[data-invalid] {
+  --ui-input-border-color: var(--ui-color-danger);
+}
+
+.root[data-disabled],
+.root:disabled {
+  cursor: not-allowed;
+  opacity: var(--ui-opacity-disabled);
+}

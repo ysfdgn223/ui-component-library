@@ -1,0 +1,92 @@
+/*
+ * Theme: glass — translucency, blur, specular edge highlights, content
+ * showing through chrome.
+ *
+ * A theme is only ever token overrides. There is not a single component
+ * selector in this file, and there must never be one.
+ *
+ * Scheme-specific values are qualified with :where() so they keep the same
+ * specificity as the plain [data-ui-theme="glass"] rules. That is what lets
+ * the degradation blocks at the bottom of this file have the last word by
+ * source order alone.
+ */
+
+[data-ui-theme="glass"] {
+  /* Shape — glass is soft. */
+  --ui-radius-control: var(--ui-radius-md);
+  --ui-radius-surface: var(--ui-radius-lg);
+  --ui-border-width: 1px;
+
+  /* Material */
+  --ui-surface-blur: blur(20px) saturate(180%);
+  --ui-surface-scrim-opacity: 0.55;
+
+  /* Elevation */
+  --ui-shadow-raised: 0 2px 8px rgb(0 0 0 / 0.08), 0 8px 24px rgb(0 0 0 / 0.06);
+  --ui-shadow-overlay: 0 16px 48px rgb(0 0 0 / 0.24), 0 2px 8px rgb(0 0 0 / 0.12);
+
+  /* Motion */
+  --ui-transition: var(--ui-duration-base) var(--ui-ease-standard);
+}
+
+[data-ui-theme="glass"]:where([data-ui-color-scheme="light"]) {
+  --ui-surface-tint: var(--ui-grey-0);
+  --ui-surface-highlight: inset 0 1px 0 rgb(255 255 255 / 0.8);
+  --ui-color-border: rgb(255 255 255 / 0.5);
+  --ui-color-border-strong: rgb(255 255 255 / 0.85);
+
+  /* Something for the glass to sit on. Without depth behind it, translucency
+     is indistinguishable from a flat panel. */
+  --ui-surface-base: radial-gradient(90rem 60rem at 12% -10%, var(--ui-blue-200), transparent 55%),
+    radial-gradient(70rem 50rem at 105% 10%, var(--ui-blue-100), transparent 60%),
+    radial-gradient(60rem 60rem at 40% 120%, var(--ui-amber-300), transparent 55%),
+    var(--ui-grey-50);
+}
+
+[data-ui-theme="glass"]:where([data-ui-color-scheme="dark"]) {
+  --ui-surface-tint: var(--ui-grey-800);
+  --ui-surface-scrim-opacity: 0.5;
+  --ui-surface-highlight: inset 0 1px 0 rgb(255 255 255 / 0.14);
+  --ui-color-border: rgb(255 255 255 / 0.12);
+  --ui-color-border-strong: rgb(255 255 255 / 0.24);
+
+  --ui-surface-base: radial-gradient(90rem 60rem at 12% -10%, var(--ui-blue-700), transparent 55%),
+    radial-gradient(70rem 50rem at 105% 10%, var(--ui-blue-600), transparent 60%),
+    radial-gradient(60rem 60rem at 40% 120%, var(--ui-green-600), transparent 55%),
+    var(--ui-grey-950);
+}
+
+/* An overlay floats higher above unpredictable content than a raised surface
+   does, so it carries more scrim and more blur of its own. */
+[data-ui-theme="glass"] {
+  --ui-surface-overlay: color-mix(
+    in srgb,
+    var(--ui-surface-tint) calc(min(var(--ui-surface-scrim-opacity) + 0.25, 1) * 100%),
+    transparent
+  );
+}
+
+/* ---------------------------------------------------------------------- *
+ * Degradation
+ *
+ * Each path swaps token values and nothing else. No component rule anywhere
+ * in the library mentions any of these conditions.
+ * ---------------------------------------------------------------------- */
+
+/* No backdrop-filter: translucency without blur is just illegible text over
+   whatever happens to be behind it, so the surfaces go opaque.
+   Deliberately not automated — see the testing notes. */
+@supports not (backdrop-filter: blur(1px)) {
+  [data-ui-theme="glass"] {
+    --ui-surface-blur: none;
+    --ui-surface-scrim-opacity: 1;
+  }
+}
+
+/* The user has asked for less transparency. One knob. */
+@media (prefers-reduced-transparency: reduce) {
+  [data-ui-theme="glass"] {
+    --ui-surface-blur: none;
+    --ui-surface-scrim-opacity: 1;
+  }
+}

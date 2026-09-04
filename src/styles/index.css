@@ -1,0 +1,16 @@
+/*
+ * The single global stylesheet a consumer imports:
+ *
+ *   import "@ysfdgn223/ui/styles.css";
+ *
+ * Order matters and is the whole cascade: primitives and semantic defaults,
+ * then the colour scheme, then the theme, then the reset that consumes them.
+ * themes/flat.css is deliberately absent — it is a specification, not a
+ * shipped theme.
+ */
+
+@import "./tokens.css";
+@import "./schemes/light.css";
+@import "./schemes/dark.css";
+@import "./themes/glass.css";
+@import "./reset.css";
