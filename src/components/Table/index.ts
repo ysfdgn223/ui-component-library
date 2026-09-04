@@ -1,6 +1,6 @@
 export { Table } from "./Table";
+export type { TableAlign } from "./variants";
 export type {
-  TableAlign,
   TableCellProps,
   TableHeaderCellProps,
   TableRootProps,

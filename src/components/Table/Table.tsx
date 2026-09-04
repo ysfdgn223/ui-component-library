@@ -1,18 +1,10 @@
 "use client";
 
 import * as React from "react";
-import { cn, type ClassMap } from "../../lib/cn";
+import { cn } from "../../lib/cn";
 import type { DataAttributes } from "../../lib/dataAttributes";
+import { ALIGN_CLASS, type TableAlign } from "./variants";
 import styles from "./Table.module.css";
-
-/** Horizontal alignment of a cell's content. */
-export type TableAlign = "start" | "center" | "end";
-
-const ALIGN_CLASS: ClassMap<TableAlign> = {
-  start: styles.alignStart,
-  center: styles.alignCenter,
-  end: styles.alignEnd,
-};
 
 export interface TableRootProps extends React.ComponentPropsWithoutRef<"table"> {
   /** The table's accessible name, rendered as a `<caption>`. */

@@ -41,6 +41,20 @@ _Avoid_: alias token, role token
 A token scoped to one component, for a knob no other component needs. Used only
 when a semantic token would be wrong to introduce.
 
+### Component anatomy
+
+**Variant module**:
+The `variants.ts` beside a component, holding its variant union types together
+with the `ClassMap` lookups from each union member to a CSS Module class. Every
+component that has variants has one, so the `.tsx` carries only its props and
+its element. The unions live here rather than in the component because
+`ClassMap` is what makes adding a member a compile error until its class
+exists, and because splitting the two would make the pair import each other.
+One per component, never a shared module: each map dereferences its own CSS
+Module, so a shared one would pull every component's stylesheet into every
+import.
+_Avoid_: variants file, class map file, style map
+
 ### Development surfaces
 
 **Specimen**:

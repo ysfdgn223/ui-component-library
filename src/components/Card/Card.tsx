@@ -1,13 +1,14 @@
 "use client";
 
 import * as React from "react";
-import { cn, type ClassMap } from "../../lib/cn";
+import { cn } from "../../lib/cn";
+import {
+  PADDING_CLASS,
+  SURFACE_CLASS,
+  type CardPadding,
+  type CardSurface,
+} from "./variants";
 import styles from "./Card.module.css";
-
-/** Which surface role the card takes — raised chrome, or a floating overlay. */
-export type CardSurface = "raised" | "overlay";
-
-export type CardPadding = "none" | "sm" | "md" | "lg";
 
 export interface CardProps extends React.ComponentPropsWithoutRef<"div"> {
   /** @default "raised" */
@@ -15,18 +16,6 @@ export interface CardProps extends React.ComponentPropsWithoutRef<"div"> {
   /** @default "md" */
   padding?: CardPadding;
 }
-
-const SURFACE_CLASS: ClassMap<CardSurface> = {
-  raised: undefined,
-  overlay: styles.surfaceOverlay,
-};
-
-const PADDING_CLASS: ClassMap<CardPadding> = {
-  none: styles.padNone,
-  sm: styles.padSm,
-  md: styles.padMd,
-  lg: styles.padLg,
-};
 
 /**
  * A surface. Card has no primitive behind it — it exists to prove that a

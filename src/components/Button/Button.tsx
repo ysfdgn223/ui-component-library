@@ -2,17 +2,17 @@
 
 import * as React from "react";
 import { useRender } from "@base-ui/react/use-render";
-import { cn, type ClassMap } from "../../lib/cn";
+import { cn } from "../../lib/cn";
 import { toPrimitiveRender, type RenderProp } from "../../lib/render";
+import {
+  SIZE_CLASS,
+  TONE_CLASS,
+  VARIANT_CLASS,
+  type ButtonSize,
+  type ButtonTone,
+  type ButtonVariant,
+} from "./variants";
 import styles from "./Button.module.css";
-
-/** How the tone is applied: filled, tinted, bordered or bare. */
-export type ButtonVariant = "solid" | "soft" | "outline" | "ghost";
-
-export type ButtonSize = "sm" | "md" | "lg";
-
-/** Which colour role the button speaks in. */
-export type ButtonTone = "accent" | "neutral" | "danger";
 
 export interface ButtonProps extends React.ComponentPropsWithoutRef<"button"> {
   /** @default "solid" */
@@ -31,25 +31,6 @@ export interface ButtonProps extends React.ComponentPropsWithoutRef<"button"> {
    */
   render?: RenderProp;
 }
-
-const VARIANT_CLASS: ClassMap<ButtonVariant> = {
-  solid: styles.solid,
-  soft: styles.soft,
-  outline: styles.outline,
-  ghost: styles.ghost,
-};
-
-const SIZE_CLASS: ClassMap<ButtonSize> = {
-  sm: styles.sizeSm,
-  md: styles.sizeMd,
-  lg: styles.sizeLg,
-};
-
-const TONE_CLASS: ClassMap<ButtonTone> = {
-  accent: styles.toneAccent,
-  neutral: styles.toneNeutral,
-  danger: styles.toneDanger,
-};
 
 export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(function Button(
   {
