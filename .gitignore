@@ -1,6 +1,10 @@
 # Dependencies
 node_modules/
 
+# Generated CSS Module types (npm run types:css)
+src/**/*.module.css.d.ts
+src/**/*.module.css.d.ts.map
+
 # Build output
 dist/
 playground/dist/
