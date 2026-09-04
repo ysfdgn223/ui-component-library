@@ -73,6 +73,8 @@ without discovering it after thirty.
 | `Field` + `Input` | label, description and error wired to one control |
 | `Card` | a surface: material, elevation, radius |
 | `Dialog` | portalled, focus-trapped, animated in CSS from state attributes |
+| `Stack` | a column: one gap token, and whether children stretch |
+| `Split` | two regions in a named ratio, stacking on their own width |
 | `Table` | presentational only — `Root` / `Header` / `Body` / `Row` / `HeaderCell` / `Cell` |
 
 Anything else gets built the day a consumer actually needs it.
@@ -87,8 +89,8 @@ library to these parts in your app, and keep that dependency there.
 ### Composition
 
 Every component merges `className`, spreads unknown props onto its root and
-forwards a ref. `Button` and the `Dialog` trigger and close parts take a
-`render` prop to change the element:
+forwards a ref. `Button`, `Stack`, `Split` and the `Dialog` trigger and close
+parts take a `render` prop to change the element:
 
 ```jsx
 <Button render={<a href="/inventory" />}>Inventory</Button>

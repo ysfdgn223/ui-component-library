@@ -6,6 +6,6 @@
  * a `.module.css` import would not parse. Adding a component is one edit here,
  * and the page and the suite both follow.
  */
-export const SPECIMEN_IDS = ["button", "card", "field", "dialog", "table"] as const;
+export const SPECIMEN_IDS = ["button", "card", "field", "dialog", "table", "split", "stack"] as const;
 
 export type SpecimenId = (typeof SPECIMEN_IDS)[number];

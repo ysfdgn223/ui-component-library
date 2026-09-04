@@ -70,6 +70,20 @@ export async function resolvedLength(locator: Locator, expression: string): Prom
 }
 
 /**
+ * The used widths of a grid's columns, in pixels.
+ *
+ * Chromium serialises `grid-template-columns` on a grid container as the used
+ * track sizes, so the length of this array is how many columns there actually
+ * are — one means the grid collapsed. Testing a container query means varying
+ * the container and observing the layout it produced, because the query itself
+ * is not observable.
+ */
+export async function gridTracks(locator: Locator): Promise<number[]> {
+  const value = await computed(locator, "grid-template-columns");
+  return value.split(" ").map(Number.parseFloat);
+}
+
+/**
  * The alpha channel of a computed background colour. Chromium serializes a
  * `color-mix()` result as `color(srgb r g b / a)` rather than `rgba(...)`, so
  * both spellings have to be understood.

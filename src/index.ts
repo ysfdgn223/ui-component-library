@@ -25,6 +25,12 @@ export type {
   DialogTriggerProps,
 } from "./components/Dialog";
 
+export { Split } from "./components/Split";
+export type { SplitGap, SplitProps, SplitRatio, SplitStackAt } from "./components/Split";
+
+export { Stack } from "./components/Stack";
+export type { StackAlign, StackGap, StackProps } from "./components/Stack";
+
 export { Table } from "./components/Table";
 export type {
   TableAlign,

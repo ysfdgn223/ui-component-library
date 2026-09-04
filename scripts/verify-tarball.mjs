@@ -82,7 +82,7 @@ check("dist has exactly one global stylesheet", () => {
 });
 
 check("components are emitted one file each, with their own CSS", () => {
-  for (const component of ["Button", "Card", "Dialog", "Field", "Input", "Table"]) {
+  for (const component of ["Button", "Card", "Dialog", "Field", "Input", "Split", "Stack", "Table"]) {
     assert(
       distFiles.includes(`components/${component}/${component}.js`),
       `components/${component}/${component}.js is missing`,
@@ -251,7 +251,7 @@ check("what the consumer imports is in its bundle", () => {
 });
 
 check("what the consumer never imports is absent from its bundle", () => {
-  for (const absent of ["DialogPopup", "FloatingFocusManager", "Inventory by warehouse", "alignEnd"]) {
+  for (const absent of ["DialogPopup", "FloatingFocusManager", "Inventory by warehouse", "alignEnd", "ratio1to3"]) {
     assert(!bundle.includes(absent), `${absent} survived tree-shaking into the consumer bundle`);
   }
 });

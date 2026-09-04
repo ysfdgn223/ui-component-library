@@ -3,6 +3,8 @@ import { ButtonSpecimen } from "./Button";
 import { CardSpecimen } from "./Card";
 import { DialogSpecimen } from "./Dialog";
 import { FieldSpecimen } from "./Field";
+import { SplitSpecimen } from "./Split";
+import { StackSpecimen } from "./Stack";
 import { TableSpecimen } from "./Table";
 import { SPECIMEN_IDS, type SpecimenId } from "./ids";
 
@@ -19,6 +21,8 @@ const BY_ID: Record<SpecimenId, Omit<SpecimenEntry, "id">> = {
   field: { title: "Field + Input", Component: FieldSpecimen },
   dialog: { title: "Dialog", Component: DialogSpecimen },
   table: { title: "Table", Component: TableSpecimen },
+  split: { title: "Split", Component: SplitSpecimen },
+  stack: { title: "Stack", Component: StackSpecimen },
 };
 
 /**

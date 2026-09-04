@@ -1,0 +1,119 @@
+/*
+ * Split is two elements on purpose.
+ *
+ * A container query is answered by the nearest ANCESTOR query container — an
+ * element that establishes containment can never match its own query. So the
+ * root establishes containment and an inner grid is what the query targets.
+ * Folding these into one element would make `stackAt` measure the Split's
+ * parent instead of the Split, which is the opposite of what it promises.
+ */
+
+.root {
+  --ui-split-columns: 1fr 1fr;
+  --ui-split-gap: var(--ui-space-5);
+
+  /* Inline-size containment computes this element's width without regard to
+     its contents, so anywhere it would otherwise shrink to fit — a flex item
+     that is not stretched, a float, an inline-block — it would collapse to
+     nothing at all. Asking for the full inline size of whatever box it sits in
+     is the only sensible answer, and a consumer's own width or max-width still
+     wins over it.
+
+     Containment also makes this element a containing block for positioned
+     descendants and a new stacking context: a `position: fixed` child of a
+     Split is fixed to the Split. Dialog portals out, so nothing in the library
+     is caught by that, but a consumer's own fixed child would be. */
+  width: 100%;
+  container-type: inline-size;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: var(--ui-split-columns);
+  gap: var(--ui-split-gap);
+}
+
+/* A `1fr` track floors at min-content, so one nowrap table or one unbreakable
+   string would push the track — and then the page — wider than the viewport.
+   Flooring the children instead of writing `minmax(0, 1fr)` into every ratio
+   keeps --ui-split-columns readable, and keeps a consumer's own override of it
+   safe by the same rule. */
+.grid > * {
+  min-width: 0;
+}
+
+/* The ratio reads the way a ratio is read: the two numbers are the two
+   columns' shares, in order. */
+.ratio1to1 {
+  --ui-split-columns: 1fr 1fr;
+}
+
+.ratio1to2 {
+  --ui-split-columns: 1fr 2fr;
+}
+
+.ratio2to1 {
+  --ui-split-columns: 2fr 1fr;
+}
+
+.ratio1to3 {
+  --ui-split-columns: 1fr 3fr;
+}
+
+.ratio3to1 {
+  --ui-split-columns: 3fr 1fr;
+}
+
+.gapNone {
+  --ui-split-gap: 0;
+}
+
+.gapSm {
+  --ui-split-gap: var(--ui-space-3);
+}
+
+.gapMd {
+  --ui-split-gap: var(--ui-space-5);
+}
+
+.gapLg {
+  --ui-split-gap: var(--ui-space-6);
+}
+
+/*
+ * The three thresholds are literals, and cannot be anything else: a custom
+ * property is substituted only in a declaration value, never in an at-rule
+ * prelude, so `@container (width < var(--x))` is not valid CSS, and a style
+ * query is equality-only so it cannot stand in. These numbers are the one
+ * arrangement decision in the library a theme cannot move. They are structure,
+ * in the same way Table's scroll container is structure — a fact about how
+ * much room two columns need, not a visual value.
+ *
+ * The queries are unnamed deliberately. The nearest ancestor container of
+ * `.grid` is always this Split's own root, by construction, so a name adds
+ * nothing but a global identifier whose CSS Modules scoping differs between
+ * build tools — and a container name that fails to resolve matches nothing,
+ * silently.
+ *
+ * They redefine the component token rather than `grid-template-columns`, so
+ * --ui-split-columns stays the single knob. Declaring it directly on `.grid`
+ * beats the ratio class's value inherited from the root, which is the
+ * precedence this needs: once stacked, the ratio is not a question.
+ */
+@container (width < 24rem) {
+  .stackSm > .grid {
+    --ui-split-columns: 1fr;
+  }
+}
+
+@container (width < 32rem) {
+  .stackMd > .grid {
+    --ui-split-columns: 1fr;
+  }
+}
+
+@container (width < 48rem) {
+  .stackLg > .grid {
+    --ui-split-columns: 1fr;
+  }
+}

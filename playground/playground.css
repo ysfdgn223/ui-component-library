@@ -61,6 +61,15 @@ body {
   align-items: flex-start;
 }
 
+/* A column that stretches, for specimens whose component has to be given a
+   real inline size. A Split establishes size containment and would collapse to
+   nothing inside .pg-stack's flex-start. */
+.pg-column {
+  display: flex;
+  flex-direction: column;
+  gap: var(--ui-space-3);
+}
+
 /* The toolbar sits outside every provider on purpose — it is not part of the
    library's surface — so it cannot use tokens and writes its own values. */
 .pg-toolbar {

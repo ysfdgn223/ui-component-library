@@ -1,0 +1,42 @@
+/*
+ * One element. A Stack is a column at every width, so it has nothing to query
+ * and needs no wrapper.
+ */
+
+.root {
+  --ui-stack-gap: var(--ui-space-5);
+
+  display: flex;
+  flex-direction: column;
+  gap: var(--ui-stack-gap);
+}
+
+.gapNone {
+  --ui-stack-gap: 0;
+}
+
+.gapSm {
+  --ui-stack-gap: var(--ui-space-3);
+}
+
+.gapMd {
+  --ui-stack-gap: var(--ui-space-5);
+}
+
+.gapLg {
+  --ui-stack-gap: var(--ui-space-6);
+}
+
+/* `stretch` is flex's own default and is left undeclared, so align="stretch"
+   maps to no class at all — the same shape as Card's surface="raised". */
+.alignStart {
+  align-items: flex-start;
+}
+
+.alignCenter {
+  align-items: center;
+}
+
+.alignEnd {
+  align-items: flex-end;
+}

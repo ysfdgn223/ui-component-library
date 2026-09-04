@@ -30,6 +30,13 @@ const TOKEN_ONLY_PROPERTIES = [
   "border-width",
   "font-family",
   "backdrop-filter",
+  // Gap is the only interesting property a layout component has, so it is the
+  // one most likely to be written as a literal. `padding` cannot join the list
+  // — Table's `var(--ui-space-3) var(--ui-space-4) 0` reads as a literal to
+  // this rule — so a padding still relies on the convention alone.
+  "gap",
+  "row-gap",
+  "column-gap",
 ];
 
 const RAW_COLOUR_OR_MATERIAL = [
